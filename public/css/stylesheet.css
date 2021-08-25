@@ -156,10 +156,18 @@ input {
 	min-width: 400px
 }
 
+.nav-margin {
+	margin-top: 25px;
+}
+
 @media (max-width: 767.98px) {
 	input {
 		min-width: 300px
 	}
+	.nav-margin {
+		margin-top: 10px;
+	}
+
 }
 
 ::-webkit-scrollbar {
@@ -187,3 +195,17 @@ input {
 img.img-corners {
 	border-radius: 3px;
 }
+
+.banner-flex {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
+}
+
+#container{width:100%;}
+#left{float:left;width:20%}
+#right{float:right;width:80%}
+#center{margin:0 auto;width:100px;}

@@ -1,20 +1,21 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Collapse, Nav, Navbar, NavItem } from 'reactstrap';
+import { Container, Navbar, Col, Row } from 'reactstrap';
 
 import ErrorBoundary from 'components/ErrorBoundary';
 import Footer from 'layouts/Footer';
-import useToggle from 'hooks/UseToggle';
 
 const NavigationLink = ({ children, label, page, setPage }) =>
   page === label ? (
-    <NavItem className="current mx-2 py-2 px-4">
-      <h6 className="m-0">{children}</h6>
-    </NavItem>
+    <div className="current mx-2 py-2 px-4 nav-item">
+      <h6 className="m-0 centered">{children}</h6>
+    </div>
   ) : (
-    <NavItem
-      className="mx-2 clickable py-2 px-4"
+    <div
+      className="mx-2 clickable py-2 px-4 nav-item"
       onClick={
         setPage
           ? () => setPage(label)
@@ -23,8 +24,8 @@ const NavigationLink = ({ children, label, page, setPage }) =>
             }
       }
     >
-      {!setPage ? <h6 className="m-0">{children}</h6> : <h6 className="m-0">{children}</h6>}
-    </NavItem>
+      {!setPage ? <h6 className="m-0 centered">{children}</h6> : <h6 className="m-0 centered">{children}</h6>}
+    </div>
   );
 
 NavigationLink.propTypes = {
@@ -35,38 +36,43 @@ NavigationLink.propTypes = {
 };
 
 const MainLayout = ({ children, setPage, page }) => {
-  const [expanded, toggle] = useToggle(false);
-
   return (
     <div className="flex-container flex-vertical viewport">
       <Navbar className="border-bottom" color="dark" expand="md" dark>
         <Container fluid="xl">
-          <div className="d-flex flex-nowrap header-banner">
-            <div className="overflow-hidden mr-auto">
+          <div id="container">
+            <div id="left">
+              {' '}
               <a href="/">
                 <img className="my-2 banner-image" src="/content/logo.png" alt="Gwen Dekker" />
               </a>
             </div>
-            <button className="navbar-toggler" type="button" onClick={toggle}>
-              <span className="navbar-toggler-icon" />
-            </button>
+            <div className="nav-margin" id="right">
+              <Row>
+                <Col xs="6" sm="3">
+                  <NavigationLink page={page} label="0" setPage={setPage}>
+                    Home
+                  </NavigationLink>
+                </Col>
+                <Col xs="6" sm="3">
+                  <NavigationLink page={page} label="1" setPage={setPage}>
+                    Projects
+                  </NavigationLink>
+                </Col>
+                <Col xs="6" sm="3">
+                  <NavigationLink page={page} label="2" setPage={setPage}>
+                    Resume
+                  </NavigationLink>
+                </Col>
+                <Col xs="6" sm="3">
+                  <NavigationLink page={page} label="3" setPage={setPage}>
+                    Contact
+                  </NavigationLink>
+                </Col>
+              </Row>
+            </div>
+            <div id="center" />
           </div>
-          <Collapse className="banner-collapse" isOpen={expanded} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavigationLink page={page} label="0" setPage={setPage}>
-                Home
-              </NavigationLink>
-              <NavigationLink page={page} label="1" setPage={setPage}>
-                Projects
-              </NavigationLink>
-              <NavigationLink page={page} label="2" setPage={setPage}>
-                Resume
-              </NavigationLink>
-              <NavigationLink page={page} label="3" setPage={setPage}>
-                Contact
-              </NavigationLink>
-            </Nav>
-          </Collapse>
         </Container>
       </Navbar>
       <div className="flex-grow">
