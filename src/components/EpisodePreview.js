@@ -16,7 +16,7 @@ const EpisodePreview = ({ episode }) => {
       <CardBody>
         <Row>
           <Col md="2" xs="6">
-            <img className="w-100" src={episode.image} alt="Solely Singleton Logo" />
+            <img className="w-100" src={episode.image} alt="Gwen Dekker Logo" />
           </Col>
           <Col md="10" xs="6">
             <Breadcrumb>

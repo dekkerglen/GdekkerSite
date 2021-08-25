@@ -8,7 +8,6 @@ const compression = require('compression');
 const schedule = require('node-schedule');
 const bodyParser = require('body-parser');
 const { render } = require('./serverjs/render');
-const { fetchPodcasts } = require('./serverjs/podcasts');
 
 // Init app
 const app = express();
@@ -74,13 +73,6 @@ app.use((err, req, res, next) => {
     title: 'Oops! Something went wrong.',
   });
 });
-
-schedule.scheduleJob('*/10 * * * *', async () => {
-  console.log('Updating podcast data from RSS feed...');
-  await fetchPodcasts();
-});
-
-fetchPodcasts();
 
 // Start server after carddb is initialized.
 http.createServer(app).listen(process.env.PORT || 5000, '127.0.0.1');

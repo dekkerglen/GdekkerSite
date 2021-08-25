@@ -12,12 +12,12 @@ const MainLayout = ({ children }) => {
 
   return (
     <div className="flex-container flex-vertical viewport">
-      <Navbar color="dark" expand="md" dark>
+      <Navbar className="border-bottom" color="dark" expand="md" dark>
         <Container fluid="xl">
           <div className="d-flex flex-nowrap header-banner">
             <div className="overflow-hidden mr-auto">
               <a href="/">
-                <img className="banner-image" src="/content/logo.png" alt="Solely Singleton" />
+                <img className="my-2 banner-image" src="/content/logo.png" alt="Gwen Dekker" />
               </a>
             </div>
             <button className="navbar-toggler" type="button" onClick={toggle}>
@@ -30,13 +30,10 @@ const MainLayout = ({ children }) => {
                 <NavLink href="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/feed">Podcast Feed</NavLink>
+                <NavLink href="/resume">Resume</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/archive">Episode Archive</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/about">About</NavLink>
+                <NavLink href="/projects">Projects</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink href="/contact">Contact</NavLink>

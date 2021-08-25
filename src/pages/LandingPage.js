@@ -1,59 +1,39 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import MainLayout from 'layouts/MainLayout';
 import RenderToRoot from 'utils/RenderToRoot';
-import EpisodePreview from 'components/EpisodePreview';
-import EpisodePropType from 'proptypes/EpisodePropType';
+import { Row, Col, Card, CardBody } from 'reactstrap';
 
-import { Row, Col } from 'reactstrap';
-
-const LandingPage = ({ episodes }) => {
+const LandingPage = () => {
   return (
     <MainLayout>
-      <h2 className="pt-4 centered">Solely Singleton — A Magic: the Gathering Podcast</h2>
-      <hr />
-      <Row className="pt-4">
-        <Col md={4} sm={12}>
-          <img className="w-100" src="/content/thumbnail.jpg" alt="Solely Singleton Logo" />
-        </Col>
-        <Col md={8} sm={12}>
-          <h4>About Solely Singleton</h4>
-          <p>
-            Solely Singleton is a Magic: the Gathering podcast predominately covering the Cube format. We strive to
-            inform newer cube owners and drafters while entertaining those community members with more experience.
-            During each season new episodes are released weekly on Tuesday morning (EST.) You can always check the
-            latest news page for information regarding the next seasonal break. Solely Singleton releases four seasons
-            each year with approximately 10 episodes per season. Episodes are planned with specific focuses such as
-            drafter oriented or new cube designer episodes. Season are balanced in the types of episodes contained
-            within them to supply everyone with relevant information and entertainment.
-          </p>
-          <p>
-            The show has grown over the past year from a humble beginning. Transforming from a pair of friends
-            discussing cube with a cheap microphone in a makeshift studio into a pair of friends discussing cube with
-            two much more expensive microphones in a makeshift studio with thousands of weekly listeners with the help
-            of dozens of supporters. Solely Singleton has become the premier cube podcast with the help of loyal
-            listeners and supportive fans, for whom the hosts are eternally thankful.
-          </p>
-        </Col>
-      </Row>
-      <hr />
-      <h3 className="centered">Latest Episodes</h3>
-      {episodes.map((podcast) => (
-        <div key={`podcast-${podcast.guid}`} className="pb-2">
-          <EpisodePreview key={podcast.guid} episode={podcast} />
-        </div>
-      ))}
-      <a href="/feed">
-        <h4 className="centered">See more...</h4>
-      </a>
-      <br />
+      <Card className="mt-4">
+        <CardBody>
+          <Row className="pt-4">
+            <Col md={4} sm={12}>
+              <img className="w-100" src="/content/gwen_headshot.png" alt="Gwen Headshot" />
+            </Col>
+            <Col md={8} sm={12}>
+              <h4>About Me</h4>
+              <p>
+                Hi! I'm Gwen. I'm a full-stack developer that loves to dabble in all sorts of various technologies. You
+                can check out a few of my projects <a href="/projects">here</a>, and also at my{' '}
+                <a href="https://github.com/dekkerglen" target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+                .
+              </p>
+              <p>
+                I'm incredibly passionate about web development - in my free time I'm often working on various personal
+                projects. If you have an idea for a website, or you need some help setting up an online space for your
+                business, don't hesisate to reach out!
+              </p>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
     </MainLayout>
   );
-};
-
-LandingPage.propTypes = {
-  episodes: PropTypes.arrayOf(EpisodePropType).isRequired,
 };
 
 export default RenderToRoot(LandingPage);

@@ -22,7 +22,7 @@ const render = (req, res, page, reactProps = {}, options = {}) => {
     node_env: process.env.NODE_ENV,
     page,
     metadata: options.metadata,
-    title: options.title ? `${options.title} - Solely Singleton` : 'Solely Singleton',
+    title: options.title ? `${options.title} - Gwen Dekker` : 'Gwen Dekker',
   });
 };
 
