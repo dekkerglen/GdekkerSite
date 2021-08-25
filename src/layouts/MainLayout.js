@@ -7,6 +7,28 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import Footer from 'layouts/Footer';
 import useToggle from 'hooks/UseToggle';
 
+const NavigationLink = ({ children, label, page, setPage }) =>
+  page === label ? (
+    <NavItem className="current mx-2 py-2 px-4">
+      <h6 className="m-0">{children}</h6>
+    </NavItem>
+  ) : (
+    <NavItem
+      className="mx-2 clickable py-2 px-4"
+      onClick={setPage && (() => setPage(label))}
+      href={!setPage && `/?page=${label}`}
+    >
+      <h6 className="m-0">{children}</h6>
+    </NavItem>
+  );
+
+NavigationLink.propTypes = {
+  children: PropTypes.node.isRequired,
+  label: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
+  setPage: PropTypes.func.isRequired,
+};
+
 const MainLayout = ({ children, setPage, page }) => {
   const [expanded, toggle] = useToggle(false);
 
@@ -25,69 +47,20 @@ const MainLayout = ({ children, setPage, page }) => {
             </button>
           </div>
           <Collapse className="banner-collapse" isOpen={expanded} navbar>
-            {setPage ? (
-              <Nav className="mr-auto" navbar>
-                <NavItem>
-                  {page === 'home' ? (
-                    <NavLink className="disabled" onClick={() => setPage('home')}>
-                      Home
-                    </NavLink>
-                  ) : (
-                    <NavLink className="clickable" onClick={() => setPage('home')}>
-                      Home
-                    </NavLink>
-                  )}
-                </NavItem>
-                <NavItem>
-                  {page === 'resume' ? (
-                    <NavLink className="disabled" onClick={() => setPage('resume')}>
-                      Resume
-                    </NavLink>
-                  ) : (
-                    <NavLink className="clickable" onClick={() => setPage('resume')}>
-                      Resume
-                    </NavLink>
-                  )}
-                </NavItem>
-                <NavItem>
-                  {page === 'projects' ? (
-                    <NavLink className="disabled" onClick={() => setPage('projects')}>
-                      Projects
-                    </NavLink>
-                  ) : (
-                    <NavLink className="clickable" onClick={() => setPage('projects')}>
-                      Projects
-                    </NavLink>
-                  )}
-                </NavItem>
-                <NavItem>
-                  {page === 'contact' ? (
-                    <NavLink className="disabled" onClick={() => setPage('contact')}>
-                      Contact
-                    </NavLink>
-                  ) : (
-                    <NavLink className="clickable" onClick={() => setPage('contact')}>
-                      Contact
-                    </NavLink>
-                  )}
-                </NavItem>
-              </Nav>
-            ) : (
-              <Nav className="mr-auto" navbar>
-                <NavItem>
-                  <NavLink href="/?page=home">Home</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/?page=resume">Resume</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/?page=projects">Projects</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/?page=contact">Contact</NavLink>
-                </NavItem>
-              </Nav>
-            )}
+            <Nav className="mr-auto" navbar>
+              <NavigationLink page={page} label="home" setPage={setPage}>
+                Home
+              </NavigationLink>
+              <NavigationLink page={page} label="projects" setPage={setPage}>
+                Projects
+              </NavigationLink>
+              <NavigationLink page={page} label="resume" setPage={setPage}>
+                Resume
+              </NavigationLink>
+              <NavigationLink page={page} label="contact" setPage={setPage}>
+                Contact
+              </NavigationLink>
+            </Nav>
           </Collapse>
         </Container>
       </Navbar>
