@@ -9,7 +9,7 @@ const Footer = () => (
   <footer className="border-top">
     <Container className="pt-3">
       <p className="center footer-text">
-        <a className="pl-4" href="/contact">
+        <a className="pl-4" href="/?page=3">
           <MailIcon size={24} />
         </a>
         <a className="pl-4" href="https://github.com/dekkerglen" target="_blank" rel="noreferrer">

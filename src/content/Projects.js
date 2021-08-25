@@ -1,19 +1,21 @@
 import React from 'react';
 
+import ContentLayout from 'layouts/ContentLayout';
+
 import { Row, Col, Card, CardBody } from 'reactstrap';
 
 const ProjectsPage = () => {
   return (
-    <>
+    <ContentLayout>
       <Card className="mt-4">
         <CardBody>
           <Row className="pt-4">
-            <Col md={4} sm={12}>
+            <Col md={3} sm={12}>
               <a href="https://cubecobra.com" target="_blank" rel="noreferrer">
                 <img className="w-100" src="/content/cc.png" alt="Cube Cobra Logo" />
               </a>
             </Col>
-            <Col md={8} sm={12}>
+            <Col md={9} sm={12}>
               <h4>
                 <a href="https://cubecobra.com" target="_blank" rel="noreferrer">
                   Cube Cobra
@@ -41,7 +43,7 @@ const ProjectsPage = () => {
       <Card className="mt-4">
         <CardBody>
           <Row className="pt-4">
-            <Col md={8} sm={12}>
+            <Col md={9} sm={12}>
               <h4>
                 <a href="https://solelysingleton.com" target="_blank" rel="noreferrer">
                   Solely Singleton (website)
@@ -58,9 +60,11 @@ const ProjectsPage = () => {
                 up to date with the latest episodes.
               </p>
             </Col>
-            <Col md={4} sm={12}>
+            <Col md={3} sm={12}>
               <a href="https://solelysingleton.com" target="_blank" rel="noreferrer">
-                <img className="w-100" src="/content/ss.jpg" alt="Solely Singleton Logo" />
+                <Card>
+                  <img className="w-100 img-corners" src="/content/ss.jpg" alt="Solely Singleton Logo" />
+                </Card>
               </a>
             </Col>
           </Row>
@@ -95,7 +99,7 @@ const ProjectsPage = () => {
           </Row>
         </CardBody>
       </Card>
-    </>
+    </ContentLayout>
   );
 };
 

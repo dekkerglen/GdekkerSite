@@ -1,10 +1,12 @@
 import React from 'react';
 
+import ContentLayout from 'layouts/ContentLayout';
+
 import { Row, Col, Card, CardBody } from 'reactstrap';
 
 const ResumePage = () => {
   return (
-    <>
+    <ContentLayout>
       <Card className="mt-4">
         <CardBody>
           <h4>Experience</h4>
@@ -227,7 +229,7 @@ const ResumePage = () => {
           </Row>
         </CardBody>
       </Card>
-    </>
+    </ContentLayout>
   );
 };
 export default ResumePage;

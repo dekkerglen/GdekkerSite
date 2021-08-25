@@ -9,15 +9,20 @@ import Resume from 'content/Resume';
 import Contact from 'content/Contact';
 import Projects from 'content/Projects';
 
+import Carousel from '@brainhubeu/react-carousel';
+// import '@brainhubeu/react-carousel/lib/style.css';
+
 const LandingPage = () => {
-  const [page, setPage] = useQueryParam('page', 'home');
+  const [page, setPage] = useQueryParam('page', '0');
 
   return (
     <MainLayout setPage={setPage} page={page}>
-      {page === 'home' && <Landing />}
-      {page === 'resume' && <Resume />}
-      {page === 'projects' && <Projects />}
-      {page === 'contact' && <Contact />}
+      <Carousel value={page} draggable={false}>
+        <Landing />
+        <Projects />
+        <Resume />
+        <Contact />
+      </Carousel>
     </MainLayout>
   );
 };

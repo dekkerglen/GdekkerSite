@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Container, Collapse, Nav, Navbar, NavItem, NavLink } from 'reactstrap';
+import { Container, Collapse, Nav, Navbar, NavItem } from 'reactstrap';
 
 import ErrorBoundary from 'components/ErrorBoundary';
 import Footer from 'layouts/Footer';
@@ -15,10 +15,15 @@ const NavigationLink = ({ children, label, page, setPage }) =>
   ) : (
     <NavItem
       className="mx-2 clickable py-2 px-4"
-      onClick={setPage && (() => setPage(label))}
-      href={!setPage && `/?page=${label}`}
+      onClick={
+        setPage
+          ? () => setPage(label)
+          : () => {
+              document.location.href = `/?page=${label}`;
+            }
+      }
     >
-      <h6 className="m-0">{children}</h6>
+      {!setPage ? <h6 className="m-0">{children}</h6> : <h6 className="m-0">{children}</h6>}
     </NavItem>
   );
 
@@ -48,25 +53,25 @@ const MainLayout = ({ children, setPage, page }) => {
           </div>
           <Collapse className="banner-collapse" isOpen={expanded} navbar>
             <Nav className="mr-auto" navbar>
-              <NavigationLink page={page} label="home" setPage={setPage}>
+              <NavigationLink page={page} label="0" setPage={setPage}>
                 Home
               </NavigationLink>
-              <NavigationLink page={page} label="projects" setPage={setPage}>
+              <NavigationLink page={page} label="1" setPage={setPage}>
                 Projects
               </NavigationLink>
-              <NavigationLink page={page} label="resume" setPage={setPage}>
+              <NavigationLink page={page} label="2" setPage={setPage}>
                 Resume
               </NavigationLink>
-              <NavigationLink page={page} label="contact" setPage={setPage}>
+              <NavigationLink page={page} label="3" setPage={setPage}>
                 Contact
               </NavigationLink>
             </Nav>
           </Collapse>
         </Container>
       </Navbar>
-      <Container fluid="xl" className="flex-grow main-content">
+      <div className="flex-grow">
         <ErrorBoundary>{children}</ErrorBoundary>
-      </Container>
+      </div>
       <Footer />
     </div>
   );
