@@ -7,7 +7,7 @@ import ErrorBoundary from 'components/ErrorBoundary';
 import Footer from 'layouts/Footer';
 import useToggle from 'hooks/UseToggle';
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, setPage, page }) => {
   const [expanded, toggle] = useToggle(false);
 
   return (
@@ -25,20 +25,69 @@ const MainLayout = ({ children }) => {
             </button>
           </div>
           <Collapse className="banner-collapse" isOpen={expanded} navbar>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink href="/">Home</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/resume">Resume</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/projects">Projects</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/contact">Contact</NavLink>
-              </NavItem>
-            </Nav>
+            {setPage ? (
+              <Nav className="mr-auto" navbar>
+                <NavItem>
+                  {page === 'home' ? (
+                    <NavLink className="disabled" onClick={() => setPage('home')}>
+                      Home
+                    </NavLink>
+                  ) : (
+                    <NavLink className="clickable" onClick={() => setPage('home')}>
+                      Home
+                    </NavLink>
+                  )}
+                </NavItem>
+                <NavItem>
+                  {page === 'resume' ? (
+                    <NavLink className="disabled" onClick={() => setPage('resume')}>
+                      Resume
+                    </NavLink>
+                  ) : (
+                    <NavLink className="clickable" onClick={() => setPage('resume')}>
+                      Resume
+                    </NavLink>
+                  )}
+                </NavItem>
+                <NavItem>
+                  {page === 'projects' ? (
+                    <NavLink className="disabled" onClick={() => setPage('projects')}>
+                      Projects
+                    </NavLink>
+                  ) : (
+                    <NavLink className="clickable" onClick={() => setPage('projects')}>
+                      Projects
+                    </NavLink>
+                  )}
+                </NavItem>
+                <NavItem>
+                  {page === 'contact' ? (
+                    <NavLink className="disabled" onClick={() => setPage('contact')}>
+                      Contact
+                    </NavLink>
+                  ) : (
+                    <NavLink className="clickable" onClick={() => setPage('contact')}>
+                      Contact
+                    </NavLink>
+                  )}
+                </NavItem>
+              </Nav>
+            ) : (
+              <Nav className="mr-auto" navbar>
+                <NavItem>
+                  <NavLink href="/?page=home">Home</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/?page=resume">Resume</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/?page=projects">Projects</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="/?page=contact">Contact</NavLink>
+                </NavItem>
+              </Nav>
+            )}
           </Collapse>
         </Container>
       </Navbar>
@@ -52,6 +101,13 @@ const MainLayout = ({ children }) => {
 
 MainLayout.propTypes = {
   children: PropTypes.node.isRequired,
+  setPage: PropTypes.func,
+  page: PropTypes.string,
+};
+
+MainLayout.defaultProps = {
+  setPage: null,
+  page: null,
 };
 
 export default MainLayout;

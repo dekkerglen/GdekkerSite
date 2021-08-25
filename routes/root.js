@@ -6,23 +6,11 @@ const router = express.Router();
 
 // Home route
 router.get('/', async (req, res) => {
-  return render(req, res, 'LandingPage', {});
-});
-
-router.get('/contact', (req, res) => {
-  return render(req, res, 'ContactPage');
+  return render(req, res, 'LandingPage');
 });
 
 router.get('/contacted', (req, res) => {
   return render(req, res, 'ContactedPage');
-});
-
-router.get('/resume', (req, res) => {
-  return render(req, res, 'ResumePage');
-});
-
-router.get('/projects', (req, res) => {
-  return render(req, res, 'ProjectsPage');
 });
 
 router.post('/contact', (req, res) => {

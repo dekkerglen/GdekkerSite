@@ -105,3 +105,11 @@ div.viewport {
 	justify-content: center;
 	align-items: center;
 }
+
+body {
+  overflow-y: scroll; /* Show scrollbars */
+}
+
+.clickable {
+	cursor: pointer;
+}

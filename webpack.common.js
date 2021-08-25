@@ -35,10 +35,6 @@ const clientConfig = merge(config, {
   entry: {
     ErrorPage: './src/pages/ErrorPage.js',
     LandingPage: './src/pages/LandingPage.js',
-    InfoPage: './src/pages/InfoPage.js',
-    ContactPage: './src/pages/ContactPage.js',
-    ResumePage: './src/pages/ResumePage.js',
-    ProjectsPage: './src/pages/ProjectsPage.js',
     ContactedPage: './src/pages/ContactedPage.js',
   },
   output: {
@@ -57,11 +53,7 @@ const serverConfig = merge(config, {
   entry: {
     'pages/ErrorPage': './src/pages/ErrorPage.js',
     'pages/LandingPage': './src/pages/LandingPage.js',
-    'pages/InfoPage': './src/pages/InfoPage.js',
-    'pages/ContactPage': './src/pages/ContactPage.js',
     'pages/ContactedPage': './src/pages/ContactedPage.js',
-    'pages/ResumePage': './src/pages/ResumePage.js',
-    'pages/ProjectsPage': './src/pages/ProjectsPage.js',
   },
   output: {
     filename: '[name].js',

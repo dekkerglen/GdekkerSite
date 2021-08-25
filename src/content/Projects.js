@@ -1,13 +1,10 @@
 import React from 'react';
 
-import MainLayout from 'layouts/MainLayout';
-import RenderToRoot from 'utils/RenderToRoot';
-
 import { Row, Col, Card, CardBody } from 'reactstrap';
 
-const LandingPage = () => {
+const ProjectsPage = () => {
   return (
-    <MainLayout>
+    <>
       <Card className="mt-4">
         <CardBody>
           <Row className="pt-4">
@@ -98,8 +95,8 @@ const LandingPage = () => {
           </Row>
         </CardBody>
       </Card>
-    </MainLayout>
+    </>
   );
 };
 
-export default RenderToRoot(LandingPage);
+export default ProjectsPage;
