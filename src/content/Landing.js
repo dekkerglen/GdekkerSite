@@ -18,8 +18,8 @@ const Landing = () => {
             <Col md={8} sm={12}>
               <h4>About Me</h4>
               <p>
-                Hi! I'm Gwen. I'm a full-stack developer that loves to dabble in all sorts of various technologies. You
-                can check out a few of my projects <a href="/projects">here</a>, and also at my{' '}
+                Hi! I'm Gwen. I'm a full-stack developer that loves to dabble in all sorts of technologies. You can
+                check out a few of my projects <a href="/?page=1">here</a>, and also at my{' '}
                 <a href="https://github.com/dekkerglen" target="_blank" rel="noreferrer">
                   GitHub
                 </a>
