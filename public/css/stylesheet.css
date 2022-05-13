@@ -209,3 +209,25 @@ img.img-corners {
 #left{float:left;width:20%}
 #right{float:right;width:80%}
 #center{margin:0 auto;width:100px;}
+
+.cell {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+.cell:hover { 
+	filter: brightness(120%); 
+	cursor: pointer;
+}
+
+.selected { 
+	filter: brightness(140%); 
+	cursor: pointer;
+}
+
+pre code {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+  padding: 20px;
+}

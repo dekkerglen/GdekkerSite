@@ -13,6 +13,10 @@ router.get('/contacted', (req, res) => {
   return render(req, res, 'ContactedPage');
 });
 
+router.get('/demos/wavefunctioncollapse', async (req, res) => {
+  return render(req, res, 'WaveFunctionCollapsePage');
+});
+
 router.post('/contact', (req, res) => {
   const { name, email, subject, message } = req.body;
 

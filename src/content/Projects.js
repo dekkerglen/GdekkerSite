@@ -10,6 +10,36 @@ const ProjectsPage = () => {
       <Card className="mt-4">
         <CardBody>
           <Row className="pt-4">
+            <Col md={9} sm={12}>
+              <h4>
+                <a href="/demos/wavefunctioncollapse" target="_blank" rel="noreferrer">
+                  Wave Function Collapse for Terrain Generation (demo)
+                </a>
+              </h4>
+              <p>
+                Wave Function Collapse, in addition to the quantum mechanics definition, is also the name of an
+                algorithm for procedural generation. This is a small demo of the algorithm, which is being used to
+                generate some simple terrain using a tilemap from Pokemon Emerald.
+              </p>
+              <p>
+                The algorithm works by ingesting a tilemap and a set of adjacency rules for each tile. The initial state
+                of the output is a superposition of all possible states. The algorithm then randomly collapses a single
+                tile, and locks in the state of that tile. The neighboring tiles possible values are then constrained to
+                all possible values given the adjacency rules. Then the algorithm repeats until all tiles are collapsed,
+                prioritizing the lowest entropy tiles.
+              </p>
+            </Col>
+            <Col md={3} sm={12}>
+              <a href="/demos/wavefunctioncollapse">
+                <img className="w-100" src="/content/waveformcollapse.png" alt="Wave Function Collapse" />
+              </a>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+      <Card className="mt-4">
+        <CardBody>
+          <Row className="pt-4">
             <Col md={3} sm={12}>
               <a href="https://cubecobra.com" target="_blank" rel="noreferrer">
                 <img className="w-100" src="/content/cc.png" alt="Cube Cobra Logo" />
