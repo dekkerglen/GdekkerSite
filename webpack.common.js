@@ -37,6 +37,7 @@ const clientConfig = merge(config, {
     LandingPage: './src/pages/LandingPage.js',
     ContactedPage: './src/pages/ContactedPage.js',
     WaveFunctionCollapsePage: './src/pages/WaveFunctionCollapsePage.js',
+    QuestingBeastPage: './src/pages/QuestingBeastPage.js',
   },
   output: {
     filename: '[name].bundle.js',

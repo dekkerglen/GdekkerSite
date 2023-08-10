@@ -17,6 +17,16 @@ router.get('/demos/wavefunctioncollapse', async (req, res) => {
   return render(req, res, 'WaveFunctionCollapsePage');
 });
 
+router.get('/questingbeast', async (req, res) => {
+  // redirect to a random seed
+  const seed = Math.floor(Math.random() * 1000000000);
+  return res.redirect(`/questingbeast/${seed}`);
+});
+
+router.get('/questingbeast/:seed', async (req, res) => {
+  return render(req, res, 'QuestingBeastPage', { seed: req.params.seed });
+});
+
 router.post('/contact', (req, res) => {
   const { name, email, subject, message } = req.body;
 

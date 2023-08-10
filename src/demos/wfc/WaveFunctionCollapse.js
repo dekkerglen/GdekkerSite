@@ -43,7 +43,15 @@ const collapseStep = (data, constraints, invalid) => {
     console.log(`${i}, ${j} is empty`);
     newData[i][j] = invalid;
   } else {
-    pick = pickRandom(data[i][j]);
+    const highPriorityOptions = newData[i][j].filter((index) => {
+      return !tiles[index].lowPriority;
+    });
+
+    if (highPriorityOptions.length > 0) {
+      pick = pickRandom(highPriorityOptions);
+    } else {
+      pick = pickRandom(newData[i][j]);
+    }
   }
 
   if (newData[i][j] !== invalid) {

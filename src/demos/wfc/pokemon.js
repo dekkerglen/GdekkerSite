@@ -316,11 +316,74 @@ const tiles = [
     left: GRASS_WATER_TOP,
     right: GRASS,
   },
+  // {
+  //   index: 43,
+  //   top: GRASS,
+  //   bottom: GRASS_CLIFF_LEFT,
+  //   left: GRASS,
+  //   right: GRASS,
+  //   lowPriority: true,
+  // },
+  // {
+  //   index: 44,
+  //   top: GRASS,
+  //   bottom: GRASS_CLIFF_RIGHT,
+  //   left: GRASS,
+  //   right: GRASS,
+  //   lowPriority: true,
+  // },
+  // {
+  //   index: 45,
+  //   top: GRASS,
+  //   bottom: GRASS,
+  //   left: GRASS,
+  //   right: GRASS_CLIFF_BOTTOM,
+  //   lowPriority: true,
+  // },
+  // {
+  //   index: 46,
+  //   top: GRASS,
+  //   bottom: GRASS,
+  //   left: GRASS_CLIFF_BOTTOM,
+  //   right: GRASS,
+  //   lowPriority: true,
+  // },
+  // {
+  //   index: 47,
+  //   top: GRASS,
+  //   bottom: GRASS,
+  //   left: GRASS,
+  //   right: GRASS_CLIFF_TOP,
+  //   lowPriority: true,
+  // },
+  // {
+  //   index: 48,
+  //   top: GRASS,
+  //   bottom: GRASS,
+  //   left: GRASS_CLIFF_TOP,
+  //   right: GRASS,
+  // },
+  // {
+  //   index: 49,
+  //   top: GRASS_CLIFF_LEFT,
+  //   bottom: GRASS,
+  //   left: GRASS,
+  //   right: GRASS,
+  //   lowPriority: true,
+  // },
+  // {
+  //   index: 50,
+  //   top: GRASS_CLIFF_RIGHT,
+  //   bottom: GRASS,
+  //   left: GRASS,
+  //   right: GRASS,
+  //   lowPriority: true,
+  // },
 ];
 
 const mappings = [];
 
-for (let j = 0; j < 6; j++) {
+for (let j = 0; j < 7; j++) {
   for (let i = 0; i < 8; i++) {
     if (tiles[j * 8 + i]) {
       mappings.push([i, j]);
