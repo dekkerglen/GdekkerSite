@@ -204,12 +204,6 @@ const newMatrix = () => {
 
 const cache = {};
 
-const getCurrentKey = () => {
-  const date = new Date();
-
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-};
-
 const getCards = async (q1, q2) => {
   const cards = [];
 
@@ -250,9 +244,7 @@ const getScryfallCards = async (key, matrix) => {
   return result;
 };
 
-const getManaMatrix = async () => {
-  const date = getCurrentKey();
-
+const getManaMatrix = async (date) => {
   if (cache[date]) {
     return cache[date];
   }
@@ -274,14 +266,12 @@ const getManaMatrix = async () => {
 
   cache[date] = {
     matrix,
-    date,
     counts,
     cards,
   };
 
   return {
     matrix,
-    date,
     counts,
     cards,
   };

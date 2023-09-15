@@ -30,7 +30,11 @@ router.get('/questingbeast/:seed', async (req, res) => {
 });
 
 router.get('/manamatrix', async (req, res) => {
-  const { matrix, date, counts, cards } = await getManaMatrix();
+  const date = new Date();
+
+  const key = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
+  const { matrix, counts, cards } = await getManaMatrix(key);
 
   return render(
     req,
@@ -38,7 +42,27 @@ router.get('/manamatrix', async (req, res) => {
     'ManaMatrixPage',
     {
       matrix,
-      date,
+      date: key,
+      counts,
+      cards,
+    },
+    {
+      title: 'Mana Matrix',
+      description: 'An small MTG puzzle game.',
+    },
+  );
+});
+
+router.get('/manamatrix/:key', async (req, res) => {
+  const { matrix, counts, cards } = await getManaMatrix(req.params.key);
+
+  return render(
+    req,
+    res,
+    'ManaMatrixPage',
+    {
+      matrix,
+      date: req.params.key,
       counts,
       cards,
     },
