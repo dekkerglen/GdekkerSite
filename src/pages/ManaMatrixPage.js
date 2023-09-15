@@ -291,7 +291,10 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
               </CardBody>
             </Card>
           ) : (
-            <>Name a card at the intersection of each column and row. The numbers indicate how many cards match.</>
+            <>
+              Name a card at the intersection of each column and row. The numbers indicate how many cards match. Bonus
+              points if you manage to not repeat any cards!
+            </>
           )}
         </CardBody>
         <div className="d-flex justify-content-center">

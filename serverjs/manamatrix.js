@@ -121,17 +121,20 @@ const valueTerms = [
   },
   () => {
     const operator = ['=', '>', '<'][Math.floor(Math.random() * 3)];
-    let value = Math.floor(Math.random() * 4);
 
     if (operator === '>') {
-      value -= 1;
+      return `ci>${Math.floor(Math.random() * 3) + 1}`;
     }
 
     if (operator === '<') {
-      value += 1;
+      return `ci<${Math.floor(Math.random() * 2) + 1}`;
     }
 
-    return `ci${operator}${value}`;
+    if (operator === '=') {
+      return `ci=${[0, 1, 2, 3, 5][Math.floor(Math.random() * 5)]}`;
+    }
+
+    return '';
   },
   () => `ci:${colors[Math.floor(Math.random() * colors.length)]}`,
   () => {
