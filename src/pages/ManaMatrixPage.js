@@ -382,7 +382,7 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
             <Tile
               coordinate="3A"
               count={counts[2][0]}
-              query={`${matrix[0][0]} ${matrix[1][0]}`}
+              query={`${matrix[0][0]} ${matrix[1][2]}`}
               value={values[2][0]}
               setValue={(val) => updateValue(val, 2, 0)}
               submitted={submitted}
@@ -391,7 +391,7 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
             <Tile
               coordinate="3B"
               count={counts[2][1]}
-              query={`${matrix[0][1]} ${matrix[1][1]}`}
+              query={`${matrix[0][1]} ${matrix[1][2]}`}
               value={values[2][1]}
               setValue={(val) => updateValue(val, 2, 1)}
               submitted={submitted}

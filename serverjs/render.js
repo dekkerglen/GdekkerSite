@@ -17,8 +17,6 @@ const render = (req, res, page, reactProps = {}, options = {}) => {
     });
   }
 
-  console.log(options);
-
   res.render('main', {
     reactProps: serialize(reactProps),
     node_env: process.env.NODE_ENV,
