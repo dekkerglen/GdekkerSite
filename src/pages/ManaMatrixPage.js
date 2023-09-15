@@ -20,7 +20,8 @@ const Tile = ({ coordinate, count, query, value, setValue, submitted, correct })
       try {
         const card = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${val}`);
         const json = await card.json();
-        if (json.card_faces) {
+        console.log(json.image_uris.art_crop);
+        if (json.card_faces && json.card_faces[0].image_uris) {
           setImage(json.card_faces[0].image_uris.art_crop || DEFAULT_IMAGE);
         } else {
           setImage(json.image_uris.art_crop || DEFAULT_IMAGE);
@@ -33,10 +34,14 @@ const Tile = ({ coordinate, count, query, value, setValue, submitted, correct })
   );
 
   useEffect(() => {
-    updateValue(value);
+    if (value && value !== '') {
+      updateValue(value);
+    }
     // we only want to run this once, so we can ignore the dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(image);
 
   if (submitted) {
     return (
@@ -188,26 +193,22 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
       [false, false, false],
       [false, false, false],
     ];
-    console.log(values);
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        console.log(`Checking ${i}, ${j}`);
         const answer = values[i][j];
         if (
           cards[i][j].some((card) => {
             if (card.toLowerCase().trim() === answer.toLowerCase().trim()) {
               return true;
             }
-
             if (
               card
                 .split('//')
-                .map((x) => x.trim())
+                .map((x) => x.trim().toLowerCase())
                 .includes(answer.toLowerCase().trim())
             ) {
               return true;
             }
-
             return false;
           })
         ) {
