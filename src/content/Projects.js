@@ -10,6 +10,35 @@ const ProjectsPage = () => {
       <Card className="mt-4">
         <CardBody>
           <Row className="pt-4">
+            <Col md={3} sm={12}>
+              <a href="/manamatrix" target="_blank" rel="noreferrer">
+                <img className="w-100" src="/content/manamatrix.png" alt="Mana Matrix" />
+              </a>
+            </Col>
+            <Col md={9} sm={12}>
+              <h4>
+                <a href="/manamatrix" target="_blank" rel="noreferrer">
+                  Mana Matrix
+                </a>
+              </h4>
+              <p>
+                Mana Matrix is a small wordle-like game where players are presented with a 3x3 grid. Each row and each
+                column has a specific{' '}
+                <a href="https://scryfall.com/docs/syntax" target="_blank" rel="noreferrer">
+                  scryfall search synytax
+                </a>
+                , and the goal is to find a card that matches each cell.
+              </p>
+              <p>
+                A new puzzle is generated every day, and players are encouraged to share their results on social media.
+              </p>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+      <Card className="mt-4">
+        <CardBody>
+          <Row className="pt-4">
             <Col md={9} sm={12}>
               <h4>
                 <a href="/demos/wavefunctioncollapse" target="_blank" rel="noreferrer">

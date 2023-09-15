@@ -1,12 +1,13 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import RenderToRoot from 'utils/RenderToRoot';
 import PropTypes from 'prop-types';
 import ChooseCardModal from 'components/ChooseCardModal';
 import withModal from 'utils/withModal';
 import useLocalStorage from 'hooks/useLocalStorage';
-import { Container, Card, CardHeader, Row, Col, CardBody, Button } from 'reactstrap';
+import { Container, Card, CardHeader, CardBody, Button } from 'reactstrap';
 
-const TileButton = withModal(Col, ChooseCardModal);
+const TileButton = withModal('div', ChooseCardModal);
 
 const DEFAULT_IMAGE = 'https://cubecobra.com/content/default_card.png';
 
@@ -39,59 +40,56 @@ const Tile = ({ coordinate, count, query, value, setValue, submitted, correct })
 
   if (submitted) {
     return (
-      <Col xs={3} className="square border tile">
-        <div className="position-absolute w-100">
-          <div className="square">
-            <img
-              className={`w-100 h-100 ${correct ? '' : 'greyscale'}`}
-              style={{ objectFit: 'cover' }}
-              src={image}
-              alt={image}
-            />
-          </div>
+      <div className="square grid-item">
+        <div className="tile-content">
+          <img
+            className={`w-100 h-100 ${correct ? '' : 'greyscale'}`}
+            style={{ objectFit: 'cover' }}
+            src={image}
+            alt={image}
+          />
         </div>
-        <div className="position-absolute white-text-black-border">
+        <div className="tile-content white-text-black-border">
           <b>{coordinate}</b>
         </div>
         {!correct && (
-          <div className="position-absolute w-100">
-            <div className="square centered">
+          <div className="tile-content">
+            <div className="h-100 centered">
               <h1 className="white-text-black-border">❌</h1>
             </div>
           </div>
         )}
-        <div className="position-absolute w-100">
-          <div className="square d-flex align-items-center align-content-end flex-column">
+        <div className="tile-content">
+          <div className="h-100 centered d-flex align-items-center align-content-end flex-column">
             <div className="mt-auto white-text-black-border">
               <b>{value}</b>
             </div>
           </div>
         </div>
-      </Col>
+      </div>
     );
   }
 
   return (
     <TileButton
-      xs={3}
-      className="square border tile clickable"
+      className="square grid-item clickable"
       modalProps={{ title: `${coordinate}: ${query}`, value, setValue: updateValue }}
     >
-      <div className="position-absolute w-100">
-        <div className="square">
-          <img className="w-100 h-100" style={{ objectFit: 'cover' }} src={image} alt={image} />
-        </div>
+      <div className="tile-content">
+        <img className="w-100 h-100" style={{ objectFit: 'cover' }} src={image} alt={image} />
       </div>
-      <div className="position-absolute white-text-black-border">
+      <div className="tile-content white-text-black-border">
         <b>{coordinate}</b>
       </div>
-      <div className="position-absolute w-100">
-        <div className="square centered">
-          <h1 className="white-text-black-border">{count}</h1>
+      {!correct && (
+        <div className="tile-content">
+          <div className="h-100 centered">
+            <h1 className="white-text-black-border">{count}</h1>
+          </div>
         </div>
-      </div>
-      <div className="position-absolute w-100">
-        <div className="square d-flex align-items-center align-content-end flex-column">
+      )}
+      <div className="tile-content">
+        <div className="h-100 centered d-flex align-items-center align-content-end flex-column">
           <div className="mt-auto white-text-black-border">
             <b>{value}</b>
           </div>
@@ -111,6 +109,59 @@ Tile.propTypes = {
   correct: PropTypes.bool.isRequired,
 };
 
+const MobileText = ({ text, reversed }) => {
+  // on mobile we want to break apart the text
+
+  const brokenText = useMemo(() => {
+    const operators = ['=', '>', '<'];
+
+    for (const operator of operators) {
+      if (text.includes(operator)) {
+        const [left, right] = text.split(operator);
+
+        if (reversed) {
+          return [right, operator + left];
+        }
+
+        return [left + operator, right];
+      }
+    }
+
+    if (text.includes(':')) {
+      const [left, right] = text.split(':');
+
+      if (reversed) {
+        return [right, `${left}:`];
+      }
+      return [`${left}:`, right];
+    }
+
+    return [text];
+  }, [reversed, text]);
+
+  return (
+    <>
+      <div className="d-block d-sm-none">
+        {brokenText.map((item, index) => (
+          <div key={index} className="d-flex justify-content-center">
+            <div className="centered flex-grow-1 flex-basis-1">{item}</div>
+          </div>
+        ))}
+      </div>
+      <div className="d-none d-sm-block">{text}</div>
+    </>
+  );
+};
+
+MobileText.propTypes = {
+  text: PropTypes.string.isRequired,
+  reversed: PropTypes.bool,
+};
+
+MobileText.defaultProps = {
+  reversed: false,
+};
+
 const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
   const [values, setValues] = useLocalStorage(`values-${date}`, [
     ['', '', ''],
@@ -118,6 +169,7 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
     ['', '', ''],
   ]);
   const [submitted, setSubmitted] = useLocalStorage(`submitted-${date}`, false);
+  const [attempts, setAttempts] = useLocalStorage(`attempts-${date}`, 0);
 
   const updateValue = useCallback(
     (newValue, row, col) => {
@@ -169,7 +221,9 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
 
   const correctText = `My results for today's Mana Matrix:\n${correct
     .map((row) => row.map((item) => (item ? '✅' : '❌')).join(' '))
-    .join('\n')}\nTry it for yourself here: https://gdekker.io/manamatrix`;
+    .join('\n')}\nAnd it only took me ${attempts} attempt${
+    attempts > 1 ? 's' : ''
+  }!\nTry it for yourself here: https://gdekker.io/manamatrix`;
 
   return (
     <Container>
@@ -185,7 +239,8 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
               </CardHeader>
               <CardBody>
                 <p>
-                  You got {correct.flat().filter((x) => x).length} out of 9 correct.
+                  With {attempts} attempt{attempts > 1 ? 's' : ''}, you got {correct.flat().filter((x) => x).length} out
+                  of 9 correct.
                   <br />
                   {
                     [
@@ -211,6 +266,9 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
                         <p>{row.map((item) => (item ? '✅' : '❌')).join(' ')}</p>
                       ))}
                       <p>
+                        And it only took me {attempts} attempt{attempts > 1 ? 's' : ''}!
+                      </p>
+                      <p>
                         Try it for yourself here:{' '}
                         <a href="https://gdekker.io/manamatrix">https://gdekker.io/manamatrix</a>
                       </p>
@@ -232,24 +290,27 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
               </CardBody>
             </Card>
           ) : (
-            <p>Name a card at the intersection of each column and row.</p>
+            <>Name a card at the intersection of each column and row. The numbers indicate how many cards match.</>
           )}
-          <Row noGutters>
-            <Col xs={1} className="vertical" />
-            <Col xs={3} className="centered">
-              {matrix[0][0]}
-            </Col>
-            <Col xs={3} className="centered">
-              {matrix[0][1]}
-            </Col>
-            <Col xs={3} className="centered">
-              {matrix[0][2]}
-            </Col>
-          </Row>
-          <Row noGutters>
-            <Col xs={1} className="vertical">
-              {matrix[1][0]}
-            </Col>
+        </CardBody>
+        <div className="d-flex justify-content-center">
+          <div className="centered flex-grow-1 flex-basis-1">
+            <MobileText text={matrix[0][0]} />
+          </div>
+          <div className="centered flex-grow-1 flex-basis-1">
+            {' '}
+            <MobileText text={matrix[0][1]} />
+          </div>
+          <div className="centered flex-grow-1 flex-basis-1">
+            {' '}
+            <MobileText text={matrix[0][2]} />
+          </div>
+        </div>
+        <div className="d-flex">
+          <div xs={1} className="vertical flex-shrink">
+            <MobileText text={matrix[1][0]} reversed />
+          </div>
+          <div className="grid-container flex-grow">
             <Tile
               coordinate="1A"
               count={counts[0][0]}
@@ -277,11 +338,13 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
               submitted={submitted}
               correct={correct[0][2]}
             />
-          </Row>
-          <Row noGutters>
-            <Col xs={1} className="vertical">
-              {matrix[1][1]}
-            </Col>
+          </div>
+        </div>
+        <div className="d-flex">
+          <div xs={1} className="vertical flex-shrink">
+            <MobileText text={matrix[1][1]} reversed />
+          </div>
+          <div className="grid-container flex-grow">
             <Tile
               coordinate="2A"
               count={counts[1][0]}
@@ -309,11 +372,13 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
               submitted={submitted}
               correct={correct[1][2]}
             />
-          </Row>
-          <Row noGutters>
-            <Col xs={1} className="vertical">
-              {matrix[1][2]}
-            </Col>
+          </div>
+        </div>
+        <div className="d-flex">
+          <div xs={1} className="vertical flex-shrink py-2">
+            <MobileText text={matrix[1][2]} reversed />
+          </div>
+          <div className="grid-container flex-grow">
             <Tile
               coordinate="3A"
               count={counts[2][0]}
@@ -341,10 +406,21 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
               submitted={submitted}
               correct={correct[2][2]}
             />
-          </Row>
+          </div>
+        </div>
+        <CardBody>
           {!submitted && (
-            <Button block outline color="success" className="mt-3" onClick={() => setSubmitted(true)}>
-              Submit Mana Matrix
+            <Button
+              block
+              outline
+              color="success"
+              className="mt-3"
+              onClick={() => {
+                setSubmitted(true);
+                setAttempts(attempts + 1);
+              }}
+            >
+              Check your score!
             </Button>
           )}
         </CardBody>

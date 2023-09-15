@@ -264,9 +264,9 @@ pre code {
 	aspect-ratio: 1 / 1;
 }
 
-
-.tile:hover {
-	background: #ddd;
+.tile {
+	top: 0px; 
+	bottom: 0px;
 }
 
 .white-text-black-border {
@@ -303,4 +303,28 @@ pre code {
 
 .greyscale {
 	filter: grayscale(100%);
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative; /* Set the positioning context */
+}
+
+.grid-item {
+  flex: 0 0 33.33%; /* Adjust width based on your design */
+  position: relative; /* Set the positioning context for the tile */
+}
+
+.tile-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Other positioning properties as needed */
+    height: 100%!important;
+    width: 100%!important;
+}
+
+.tile-content:nth-child(2) {
+  z-index: 1; /* Bring this element above others */
 }
