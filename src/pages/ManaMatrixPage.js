@@ -167,7 +167,7 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
     return result;
   }, [values, cards]);
 
-  const correctText = `My results for the Mana Matrix ${date}:\n${correct
+  const correctText = `My results for today's Mana Matrix:\n${correct
     .map((row) => row.map((item) => (item ? '✅' : '❌')).join(' '))
     .join('\n')}\nTry it for yourself here: https://gdekker.io/manamatrix`;
 
@@ -206,7 +206,7 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
                     Share your results! Copy and paste your results here.
                     <br />
                     <Card className="p-2 mt-2">
-                      <p>My results for the Mana Matrix {date}:</p>
+                      <p>My results for today's Mana Matrix:</p>
                       {correct.map((row) => (
                         <p>{row.map((item) => (item ? '✅' : '❌')).join(' ')}</p>
                       ))}
