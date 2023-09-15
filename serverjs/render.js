@@ -23,6 +23,7 @@ const render = (req, res, page, reactProps = {}, options = {}) => {
     page,
     metadata: options.metadata,
     title: options.title ? `${options.title} - Gwen Dekker` : 'Gwen Dekker',
+    metaDescription: options.description || 'Gwen Dekker is a software developer passionate about building new things.',
   });
 };
 
