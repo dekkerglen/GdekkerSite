@@ -125,7 +125,7 @@ const MobileText = ({ text, reversed }) => {
         const [left, right] = text.split(operator);
 
         if (reversed) {
-          return [right, operator + left];
+          return [right, left + operator];
         }
 
         return [left + operator, right];
