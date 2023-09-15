@@ -17,12 +17,14 @@ const render = (req, res, page, reactProps = {}, options = {}) => {
     });
   }
 
+  console.log(options);
+
   res.render('main', {
     reactProps: serialize(reactProps),
     node_env: process.env.NODE_ENV,
     page,
     metadata: options.metadata,
-    title: options.title ? `${options.title} - Gwen Dekker` : 'Gwen Dekker',
+    title: options.title ? `${options.title}` : 'Gwen Dekker',
     metaDescription: options.description || 'Gwen Dekker is a software developer passionate about building new things.',
   });
 };
