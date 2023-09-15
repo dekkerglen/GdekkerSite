@@ -1,3 +1,3 @@
 # Gwen Dekker
 
-A website to support the Solely Singelton Podcast
+A website for my portfolio

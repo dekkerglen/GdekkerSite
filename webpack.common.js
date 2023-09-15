@@ -38,6 +38,7 @@ const clientConfig = merge(config, {
     ContactedPage: './src/pages/ContactedPage.js',
     WaveFunctionCollapsePage: './src/pages/WaveFunctionCollapsePage.js',
     QuestingBeastPage: './src/pages/QuestingBeastPage.js',
+    ManaMatrixPage: './src/pages/ManaMatrixPage.js'
   },
   output: {
     filename: '[name].bundle.js',
@@ -57,6 +58,7 @@ const serverConfig = merge(config, {
     'pages/LandingPage': './src/pages/LandingPage.js',
     'pages/ContactedPage': './src/pages/ContactedPage.js',
     'pages/WaveFunctionCollapsePage': './src/pages/WaveFunctionCollapsePage.js',
+    'pages/ManaMatrixPage': './src/pages/ManaMatrixPage.js'
   },
   output: {
     filename: '[name].js',

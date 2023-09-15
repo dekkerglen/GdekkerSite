@@ -1,6 +1,8 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
+const fetch = require('node-fetch');
 const { render } = require('../serverjs/render');
+const { getManaMatrix } = require('../serverjs/manamatrix');
 
 const router = express.Router();
 
@@ -25,6 +27,22 @@ router.get('/questingbeast', async (req, res) => {
 
 router.get('/questingbeast/:seed', async (req, res) => {
   return render(req, res, 'QuestingBeastPage', { seed: req.params.seed });
+});
+
+router.get('/manamatrix', async (req, res) => {
+  const { matrix, date, counts } = await getManaMatrix();
+
+  return render(req, res, 'ManaMatrixPage', {
+    matrix,
+    date,
+    counts,
+  });
+});
+
+router.get('/tree', async (req, res) => {
+  const response = await fetch('https://cubecobra.com/cube/api/cardnames');
+  const json = await response.json();
+  res.status(200).json(json);
 });
 
 router.post('/contact', (req, res) => {
