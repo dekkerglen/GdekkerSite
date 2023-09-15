@@ -267,7 +267,6 @@ pre code {
 
 .tile:hover {
 	background: #ddd;
-	cursor: pointer;
 }
 
 .white-text-black-border {
@@ -300,4 +299,8 @@ pre code {
 .autocomplete-list li.active {
 	background-color: var(--primary) !important;
 	color: var(--bg);
+}
+
+.greyscale {
+	filter: grayscale(100%);
 }

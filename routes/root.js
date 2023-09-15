@@ -30,12 +30,13 @@ router.get('/questingbeast/:seed', async (req, res) => {
 });
 
 router.get('/manamatrix', async (req, res) => {
-  const { matrix, date, counts } = await getManaMatrix();
+  const { matrix, date, counts, cards } = await getManaMatrix();
 
   return render(req, res, 'ManaMatrixPage', {
     matrix,
     date,
     counts,
+    cards,
   });
 });
 
