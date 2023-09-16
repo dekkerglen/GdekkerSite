@@ -247,6 +247,7 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
                     [
                       'Today might not be your day.',
                       'At least you got one right!',
+                      'Plenty of room for improvement!',
                       'Not too bad!',
                       'Nice!',
                       'Great job!',
