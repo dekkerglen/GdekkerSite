@@ -247,11 +247,21 @@ const getScryfallCards = async (key, matrix) => {
   return result;
 };
 
-const getManaMatrix = async (date) => {
-  if (cache[date]) {
-    return cache[date];
+function cachePromise(key, callback) {
+  const existingPromise = cache[key];
+  if (existingPromise) {
+    return existingPromise;
   }
 
+  const newPromise = callback().catch((error) => {
+    delete cache[key];
+    throw error;
+  });
+  cache[key] = newPromise;
+  return newPromise;
+}
+
+const generateMatrix = async (date) => {
   seedrandom(date, { global: true });
   let counts = [
     [0, 0, 0],
@@ -278,6 +288,10 @@ const getManaMatrix = async (date) => {
     counts,
     cards,
   };
+};
+
+const getManaMatrix = async (date) => {
+  return cachePromise(date, async () => generateMatrix(date));
 };
 
 module.exports = {
