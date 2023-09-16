@@ -86,13 +86,11 @@ const Tile = ({ coordinate, count, query, value, setValue, submitted, correct })
       <div className="tile-content white-text-black-border">
         <b>{coordinate}</b>
       </div>
-      {!correct && (
-        <div className="tile-content">
-          <div className="h-100 centered">
-            <h1 className="white-text-black-border">{count}</h1>
-          </div>
+      <div className="tile-content">
+        <div className="h-100 centered">
+          <h1 className="white-text-black-border">{count}</h1>
         </div>
-      )}
+      </div>
       <div className="tile-content">
         <div className="h-100 centered d-flex align-items-center align-content-end flex-column">
           <div className="mt-auto white-text-black-border">
