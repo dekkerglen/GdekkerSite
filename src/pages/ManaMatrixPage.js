@@ -218,7 +218,7 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
     return result;
   }, [values, cards]);
 
-  const correctText = `My results for today's Mana Matrix:\n${correct
+  const correctText = `My results for today's Mana Matrix (${date}):\n${correct
     .map((row) => row.map((item) => (item ? '✅' : '❌')).join(' '))
     .join('\n')}\nAnd it only took me ${attempts} attempt${
     attempts > 1 ? 's' : ''
@@ -261,7 +261,7 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
                     Share your results! Copy and paste your results here.
                     <br />
                     <Card className="p-2 mt-2">
-                      <p>My results for today's Mana Matrix:</p>
+                      <p>My results for today's Mana Matrix ({date}): </p>
                       {correct.map((row) => (
                         <p>{row.map((item) => (item ? '✅' : '❌')).join(' ')}</p>
                       ))}

@@ -26,26 +26,31 @@ const keywords = [
   'Scry',
 ];
 
-const shuffle = (array) => {
-  let m = array.length;
-  let t;
-  let i;
-  while (m) {
-    i = Math.floor(Math.random() * m);
-    m -= 1;
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-  return array;
-};
-
-const nRandomFromArray = (array, n) => {
-  const shuffled = shuffle(array.slice(0));
-  return shuffled.slice(0, n);
-};
-
 const colors = ['W', 'U', 'B', 'R', 'G'];
+const combinations = [
+  ...colors,
+  'UW',
+  'UB',
+  'UR',
+  'UG',
+  'WB',
+  'WR',
+  'WG',
+  'BR',
+  'BG',
+  'RG',
+  'GWU',
+  'WUB',
+  'WUR',
+  'UBR',
+  'BRG',
+  'RGW',
+  'RUG',
+  'BUG',
+  'WBG',
+  'WRG',
+  'WUBRG',
+];
 
 const oracleTerms = [
   'destroy target',
@@ -136,11 +141,8 @@ const valueTerms = [
 
     return '';
   },
-  () => `ci:${colors[Math.floor(Math.random() * colors.length)]}`,
   () => {
-    const numColors = [1, 2, 3, 5][Math.floor(Math.random() * 4)];
-
-    return `ci=${nRandomFromArray(colors, numColors).join('')}`;
+    return `ci=${combinations[Math.floor(Math.random() * combinations.length)]}`;
   },
   () =>
     `type:${
