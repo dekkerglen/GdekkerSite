@@ -23,7 +23,6 @@ const keywords = [
   'Trample',
   'Vigilance',
   'Flashback',
-  'Scry',
 ];
 
 const colors = ['W', 'U', 'B', 'R', 'G'];
