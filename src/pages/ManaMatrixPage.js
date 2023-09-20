@@ -20,7 +20,6 @@ const Tile = ({ coordinate, count, query, value, setValue, submitted, correct })
       try {
         const card = await fetch(`https://api.scryfall.com/cards/named?fuzzy=${val}`);
         const json = await card.json();
-        console.log(json.image_uris.art_crop);
         if (json.card_faces && json.card_faces[0].image_uris) {
           setImage(json.card_faces[0].image_uris.art_crop || DEFAULT_IMAGE);
         } else {
