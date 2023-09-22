@@ -7,10 +7,10 @@ const sets = require('./sets');
 const keywords = [
   'Deathtouch',
   'Defender',
-  'Double Strike',
+  '"Double Strike"',
   'Enchant',
   'Equip',
-  'First Strike',
+  '"First Strike"',
   'Flash',
   'Flying',
   'Haste',
@@ -114,7 +114,7 @@ const valueTerms = [
     }
 
     if (operator === '>') {
-      return `cmc>=${Math.floor(Math.random() * 4) + 3}`;
+      return `cmc>${Math.floor(Math.random() * 4) + 3}`;
     }
 
     if (operator === '<') {
@@ -124,21 +124,7 @@ const valueTerms = [
     return '';
   },
   () => {
-    const operator = ['=', '>', '<'][Math.floor(Math.random() * 3)];
-
-    if (operator === '>') {
-      return `ci>${Math.floor(Math.random() * 3) + 1}`;
-    }
-
-    if (operator === '<') {
-      return `ci<${Math.floor(Math.random() * 2) + 1}`;
-    }
-
-    if (operator === '=') {
-      return `ci=${[0, 1, 2, 3, 5][Math.floor(Math.random() * 5)]}`;
-    }
-
-    return '';
+    return `ci=${[0, 1, 2, 3, 5][Math.floor(Math.random() * 5)]}`;
   },
   () => {
     return `ci=${combinations[Math.floor(Math.random() * combinations.length)]}`;
@@ -170,40 +156,36 @@ const valueTerms = [
   },
 ];
 
-const randomTerm = () => {
-  const term = Math.floor(Math.random() * 5);
-
-  if (term === 0) {
-    return `oracle:"${oracleTerms[Math.floor(Math.random() * oracleTerms.length)]}"`;
+const shuffle = (array) => {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
   }
-  return valueTerms[Math.floor(Math.random() * valueTerms.length)]();
+  return copy;
+};
+
+const nDistinctRandom = (array, n) => {
+  const copy = shuffle(array);
+  return copy.slice(0, n);
 };
 
 const newMatrix = () => {
   // generate 6 terms, if we already have this term we need to get a new one
-  const xterms = [];
-  const yterms = [];
 
-  while (xterms.length < 3) {
-    const term = randomTerm();
-    if (!xterms.includes(term)) {
-      xterms.push(term);
-    }
-  }
+  const numOracle = [0, 1, 1, 2, 2, 3][Math.floor(Math.random() * 6)];
 
-  while (yterms.length < 3) {
-    const term = randomTerm();
-    if (!yterms.includes(term) && !xterms.includes(term)) {
-      if (!(term.startsWith('ci') && xterms.some((xterm) => xterm.startsWith('ci')))) {
-        yterms.push(term);
-      }
-    }
-  }
+  const terms = shuffle([
+    ...nDistinctRandom(valueTerms, 6 - numOracle).map((fn) => fn()),
+    ...nDistinctRandom(oracleTerms, numOracle).map((term) => `o:"${term}"`),
+  ]);
 
-  return [
-    [xterms[0], xterms[1], xterms[2]],
-    [yterms[0], yterms[1], yterms[2]],
+  const matrix = [
+    [terms[0], terms[1], terms[2]],
+    [terms[3], terms[4], terms[5]],
   ];
+
+  return matrix;
 };
 
 const cache = {};
