@@ -107,21 +107,7 @@ const oracleTerms = [
 const valueTerms = [
   () => `type:${types[Math.floor(Math.random() * types.length)]}`,
   () => {
-    const operator = ['=', '>', '<'][Math.floor(Math.random() * 3)];
-
-    if (operator === '=') {
-      return `cmc=${Math.floor(Math.random() * 7)}`;
-    }
-
-    if (operator === '>') {
-      return `cmc>${Math.floor(Math.random() * 4) + 3}`;
-    }
-
-    if (operator === '<') {
-      return `cmc<${Math.floor(Math.random() * 4) + 1}`;
-    }
-
-    return '';
+    return `cmc${['=0', '=1', '=2', '=3', '=5', '=6', '=7', '>7'][Math.floor(Math.random() * 8)]}`;
   },
   () => {
     return `ci=${[0, 1, 2, 3, 5][Math.floor(Math.random() * 5)]}`;

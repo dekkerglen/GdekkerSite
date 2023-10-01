@@ -10,6 +10,39 @@ const ProjectsPage = () => {
       <Card className="mt-4">
         <CardBody>
           <Row className="pt-4">
+            <Col md={6} sm={12}>
+              <h4>
+                <a href="/demos/limitedspace" target="_blank" rel="noreferrer">
+                  Fruit Fitting Frenzy!
+                </a>
+              </h4>
+              <p>
+                Fruit Fitting Frenzy is a small puzzle game where players are presented with a grid, and restrictions on
+                how to fit fruit into the grid. The goal is to fit all the fruit into the grid while following all the
+                restrictions.
+              </p>
+              <p>
+                This game was made for <a href="https://ldjam.com/events/ludum-dare/54">Ludum Dare 54</a>, a game jam
+                where participants are given 48 hours to make a game from scratch. The theme for this jam was 'Limited
+                Space'. I built this game under the compo rules, meaning I had to do all the work myself and I had to
+                make the game from scratch (no pre-existing code).
+              </p>
+              <p>
+                This is my first time participating in Ludum Dare, and I scoped for a very small game. The game isn't
+                incredibly deep, but I think it is a fun little puzzle game that can be played in a few minutes.
+              </p>
+            </Col>
+            <Col md={6} sm={12}>
+              <a href="/demos/limitedspace">
+                <img className="w-100" src="/content/tinygarden.png" alt="Fruit Fitting Frenzy!" />
+              </a>
+            </Col>
+          </Row>
+        </CardBody>
+      </Card>
+      <Card className="mt-4">
+        <CardBody>
+          <Row className="pt-4">
             <Col md={3} sm={12}>
               <a href="/manamatrix" target="_blank" rel="noreferrer">
                 <img className="w-100" src="/content/manamatrix.png" alt="Mana Matrix" />

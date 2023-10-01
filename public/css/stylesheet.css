@@ -328,3 +328,15 @@ pre code {
 .tile-content:nth-child(2) {
   z-index: 1; /* Bring this element above others */
 }
+
+.garden-tile:hover {
+	background-color: #DDD !important
+}
+
+.big-container {
+	max-width: 1140px;
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+}

@@ -73,6 +73,10 @@ router.get('/manamatrix/:key', async (req, res) => {
   );
 });
 
+router.get('/demos/limitedspace', async (req, res) => {
+  return render(req, res, 'LimitedSpace');
+});
+
 router.get('/tree', async (req, res) => {
   const response = await fetch('https://cubecobra.com/cube/api/cardnames');
   const json = await response.json();
