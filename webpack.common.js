@@ -39,6 +39,7 @@ const clientConfig = merge(config, {
     WaveFunctionCollapsePage: './src/pages/WaveFunctionCollapsePage.js',
     QuestingBeastPage: './src/pages/QuestingBeastPage.js',
     ManaMatrixPage: './src/pages/ManaMatrixPage.js',
+    MindTwistPage: './src/pages/MindTwistPage.js',
     LimitedSpace: './src/pages/LimitedSpace.js',
   },
   output: {
@@ -61,6 +62,7 @@ const serverConfig = merge(config, {
     'pages/WaveFunctionCollapsePage': './src/pages/WaveFunctionCollapsePage.js',
     'pages/ManaMatrixPage': './src/pages/ManaMatrixPage.js',
     'pages/QuestingBeastPage': './src/pages/QuestingBeastPage.js',
+    'pages/MindTwistPage': './src/pages/MindTwistPage.js',
     'pages/LimitedSpace': './src/pages/LimitedSpace.js',
   },
   output: {

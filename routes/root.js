@@ -73,6 +73,28 @@ router.get('/manamatrix/:key', async (req, res) => {
   );
 });
 
+router.get('/mindtwist/:id', async (req, res) => {
+  const key = `mindtwist-${req.params.id}`;
+
+  const { matrix, counts, cards } = await getManaMatrix(key);
+
+  return render(
+    req,
+    res,
+    'MindTwistPage',
+    {
+      matrix,
+      date: key,
+      counts,
+      cards,
+    },
+    {
+      title: 'Mana Matrix',
+      description: 'An small MTG puzzle game.',
+    },
+  );
+});
+
 router.get('/demos/limitedspace', async (req, res) => {
   return render(req, res, 'LimitedSpace');
 });

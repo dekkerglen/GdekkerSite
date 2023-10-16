@@ -216,6 +216,21 @@ const getScryfallCards = async (key, matrix) => {
   return result;
 };
 
+const presets = {
+  'mindtwist-1': [
+    ['type:goblin', 'type:merfolk', 'type:angel'],
+    ['pow=3', 'tou=3', 'mv=3'],
+  ],
+  'mindtwist-2': [
+    ['o:battlefield', 'o:graveyard', `o:exile`],
+    ['pow=1', 'ci=2', 'set:mh2'],
+  ],
+  'mindtwist-3': [
+    ['kw:deathtouch', 'o:"target opponent"', 'o:sorcery'],
+    ['o:enchanted', 'o:"if you do"', 'set:eld'],
+  ],
+};
+
 function cachePromise(key, callback) {
   const existingPromise = cache[key];
   if (existingPromise) {
@@ -240,17 +255,22 @@ const generateMatrix = async (date) => {
   let matrix;
   let cards;
 
+  if (presets[date]) {
+    matrix = presets[date];
+    cards = await getScryfallCards(date, matrix);
+    counts = cards.map((row) => row.map((item) => item.length));
+    return {
+      matrix,
+      counts,
+      cards,
+    };
+  }
+
   do {
     matrix = newMatrix();
     cards = await getScryfallCards(date, matrix);
     counts = cards.map((row) => row.map((item) => item.length));
   } while (counts.some((row) => row.some((item) => item === 0)));
-
-  cache[date] = {
-    matrix,
-    counts,
-    cards,
-  };
 
   return {
     matrix,
