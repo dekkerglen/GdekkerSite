@@ -101,6 +101,10 @@ MobileText.propTypes = {
   text: PropTypes.string.isRequired,
 };
 
+const removeAccents = (str) => {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};
+
 const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
   const [values, setValues] = useLocalStorage(`values-${date}`, [
     ['', '', ''],
@@ -137,7 +141,8 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
               card
                 .split('//')
                 .map((x) => x.trim().toLowerCase())
-                .includes(answer.toLowerCase().trim())
+                .map(removeAccents)
+                .includes(removeAccents(answer).toLowerCase().trim())
             ) {
               return true;
             }
