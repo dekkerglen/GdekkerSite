@@ -56,7 +56,7 @@ const Tile = ({ coordinate, count, query, value, setValue, correct }) => {
         />
       </div>
       <div className="tile-content white-text-black-border">
-        <b>{coordinate}</b>
+        <h1>{coordinate}</h1>
       </div>
       {!correct && (
         <div className="tile-content">
