@@ -11,6 +11,10 @@ const TileButton = withModal('div', ChooseCardModal);
 
 const DEFAULT_IMAGE = 'https://cubecobra.com/content/default_card.png';
 
+const removeAccents = (str) => {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+};
+
 const Tile = ({ coordinate, count, query, value, setValue, submitted, correct }) => {
   const [image, setImage] = useState(DEFAULT_IMAGE);
 
@@ -202,7 +206,8 @@ const ManaMatrixPage = ({ matrix, date, counts, cards }) => {
               card
                 .split('//')
                 .map((x) => x.trim().toLowerCase())
-                .includes(answer.toLowerCase().trim())
+                .map(removeAccents)
+                .includes(removeAccents(answer).toLowerCase().trim())
             ) {
               return true;
             }

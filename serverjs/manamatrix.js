@@ -218,16 +218,16 @@ const getScryfallCards = async (key, matrix) => {
 
 const presets = {
   'mindtwist-1': [
-    ['type:goblin', 'type:merfolk', 'type:elf'],
-    ['pow=3', 'tou=3', 'mv=3'],
+    ['type:dinosaur', 'ci=g', 'mv=6'],
+    ['kw:trample', 'pow=6', 'tou=6'],
   ],
   'mindtwist-2': [
-    ['o:hand', 'o:graveyard', `o:exile`],
-    ['pow=1', 'ci=2', 'set:mh2'],
+    ['kw:vigilance', 'kw:deathtouch', 'kw:haste'],
+    [`t:legendary`, `o:"you control"`, `pow=tou`],
   ],
   'mindtwist-3': [
-    ['kw:deathtouch', 'kw:lifelink', 'kw:haste'],
-    ['o:"+1/+1"', 'o:"if you do"', 'set:eld'],
+    [`o:"beginning"`, `t:faerie`, `artist:"Rebecca Guay"`],
+    [`mv=2`, 'ci=B', 'o:"1/1"'],
   ],
 };
 
