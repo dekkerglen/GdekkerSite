@@ -19,5 +19,5 @@
             "utils/*": ["./src/utils/*"]
         }
     },
-    "include": ["src/**/*", "app.js", "serverjs/*", "routes/*"]
+    "include": ["src/**/*", "app.js", "serverjs/*", "routes/*", "serverjs/mtgconnect/mtgconnect.js"]
 }

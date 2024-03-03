@@ -123,7 +123,7 @@ const ResumePage = () => {
               </h6>
               <h6>Master of Science - MS, Computer Science</h6>
               <p>
-                <i>2019 - In Progress</i>
+                <i>2019 - 2023</i>
               </p>
             </Col>
           </Row>
@@ -157,8 +157,8 @@ const ResumePage = () => {
               <img className="w-100" src="/content/js.jpg" alt="js logo" />
             </Col>
             <Col xs="8" sm="11">
-              <h6>JavaScript</h6>
-              <p>Extensive frontend and backend experience using Javascript.</p>
+              <h6>JavaScript/Typescript</h6>
+              <p>Extensive frontend and backend experience using Javascript and Typescript.</p>
             </Col>
           </Row>
           <Row className="pt-4">
