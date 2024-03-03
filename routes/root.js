@@ -1,6 +1,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const fetch = require('node-fetch');
+const cors = require('cors');
 const { render } = require('../serverjs/render');
 const { getManaMatrix } = require('../serverjs/manamatrix');
 const { getConnections } = require('../serverjs/mtgconnect/mtgconnect');
@@ -96,7 +97,7 @@ router.get('/mindtwist/:id', async (req, res) => {
   );
 });
 
-router.get('/mtgconnect/:id', async (req, res) => {
+router.get('/mtgconnect/:id', cors(), async (req, res) => {
   const key = `mtgconnect-${req.params.id}`;
 
   const connections = await getConnections(key);

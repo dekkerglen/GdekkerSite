@@ -36,6 +36,7 @@
     "compression": "^1.7.4",
     "core-js": "^3.6.3",
     "core-js-pure": "^3.6.3",
+    "cors": "^2.8.5",
     "css-loader": "^6.2.0",
     "csurf": "^1.10.0",
     "dotenv": "^8.2.0",
