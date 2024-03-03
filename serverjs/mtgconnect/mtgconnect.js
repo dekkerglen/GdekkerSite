@@ -34,13 +34,12 @@ const theseCardsAreDistinct = (list) => {
 const newConnections = async (seed) => {
   seedrandom(seed, { global: true });
 
-  const pool = shuffle(nDistinctRandom(allOracles, 500));
+  const pool = shuffle(nDistinctRandom(allOracles, 300));
 
   const detailedCards = await Promise.all(
     pool.map(async (card) => {
       try {
         const cobraresult = await fetch(`https://cubecobra.com/tool/cardjson/${card}`);
-        console.log(`https://cubecobra.com/tool/cardjson/${card}`);
         return cobraresult.json();
       } catch (e) {
         return null;
