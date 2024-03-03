@@ -115,12 +115,6 @@ const valueTerms = [
   () => {
     return `ci=${combinations[Math.floor(Math.random() * combinations.length)]}`;
   },
-  () =>
-    `type:${
-      ['Artifact', 'Creature', 'Enchantment', 'Instant', 'Land', 'Planeswalker', 'Sorcery', 'Legendary'][
-        Math.floor(Math.random() * 8)
-      ]
-    }`,
   () => `power=${Math.floor(Math.random() * 7)}`,
   () => `toughness=${Math.floor(Math.random() * 7)}`,
   () => `set:${sets[Math.floor(Math.random() * sets.length)]}`,
@@ -170,9 +164,9 @@ const theseCardsAreDistinct = (list) => {
 const getCards = async (q1, q2) => {
   const cards = [];
 
-  let nextPage = `https://api.scryfall.com/cards/search?order=cmc&q=${encodeURIComponent(q1)}+${encodeURIComponent(
-    q2,
-  )}`;
+  let nextPage = `https://api.scryfall.com/cards/search?order=cmc&q=${encodeURIComponent(
+    't:"legendary creature"',
+  )}+${encodeURIComponent(q1)}+${encodeURIComponent(q2)}`;
 
   do {
     const result = await fetch(nextPage);
