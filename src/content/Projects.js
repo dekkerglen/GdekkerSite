@@ -12,7 +12,7 @@ const ProjectsPage = () => {
           <Row className="pt-4">
             <Col md={6} sm={12}>
               <a href="/demos/limitedspace">
-                <img className="w-100" src="/content/tinygarden.png" alt="Fruit Fitting Frenzy!" />
+                <img className="w-100" src="/content/synergyconnections.png" alt="Fruit Fitting Frenzy!" />
               </a>
             </Col>
             <Col md={6} sm={12}>
