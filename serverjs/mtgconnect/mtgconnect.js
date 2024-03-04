@@ -50,65 +50,12 @@ const combinations = [
   'WUBRG',
 ];
 
-const oracleTerms = [
-  'destroy target',
-  'exile target',
-  'counter target',
-  'return target',
-  'creature gets',
-  'creature gains',
-  'until end of turn',
-  'add one',
-  'enters the battlefield',
-  'whenever',
-  ': add',
-  'for each',
-  'unless',
-  'up to',
-  'create',
-  'damage to',
-  'search your library',
-  'draw a card',
-  'put a',
-  'put it',
-  'discard',
-  'sacrifice',
-  "can't",
-  'remove',
-  'reveal',
-  'the beginning of',
-  'you control',
-  'becomes',
-  'each opponent',
-  'target opponent',
-  'target player',
-  'another',
-  'where x is',
-  'random order',
-  'any order',
-  'bottom of',
-  'copy',
-  'top of',
-  'if you do',
-  'token with',
-  'permanent',
-  'tapped',
-  'untapped',
-  "doesn't",
-  'next',
-  'you gain',
-  'you have',
-  'you lose',
-  'additional cost',
-  'this way',
-];
-
 const valueTerms = [
   () => {
     return `cmc${['=0', '=1', '=2', '=3', '=5', '=6', '=7', '>7'][Math.floor(Math.random() * 8)]}`;
   },
   () => {
-    return `ci=${[3, 5][Math.floor(Math.random() * 5)]}`;
+    return `ci=${[3, 5][Math.floor(Math.random() * 2)]}`;
   },
   () => {
     return `ci=${combinations[Math.floor(Math.random() * combinations.length)]}`;
@@ -142,12 +89,12 @@ const theseCardsAreDistinct = (list) => {
   return true;
 };
 
-const getCards = async (q1, q2) => {
+const getCards = async (q1) => {
   const cards = [];
 
   let nextPage = `https://api.scryfall.com/cards/search?order=cmc&q=${encodeURIComponent(
     't:"legendary creature"',
-  )}+${encodeURIComponent(q1)}+${encodeURIComponent(q2)}`;
+  )}+${encodeURIComponent(q1)}`;
 
   do {
     const result = await fetch(nextPage);
@@ -175,16 +122,9 @@ const newConnections = async (seed) => {
 
   do {
     do {
-      const numOracle = [0, 1, 1, 2, 2, 3][Math.floor(Math.random() * 6)];
+      const [q1] = nDistinctRandom(valueTerms, 1).map((fn) => fn());
 
-      const terms = shuffle([
-        ...nDistinctRandom(valueTerms, 6 - numOracle).map((fn) => fn()),
-        ...nDistinctRandom(oracleTerms, numOracle).map((term) => `o:"${term}"`),
-      ]);
-
-      const [q1, q2] = terms;
-
-      cards = await getCards(q1, q2);
+      cards = await getCards(q1);
     } while (cards.length < 20);
 
     const cobraresult = await fetch(`https://cubecobra.com/tool/mtgconnect`, {
@@ -192,7 +132,7 @@ const newConnections = async (seed) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ oracles: cards }),
+      body: JSON.stringify({ oracles: cards.length > 100 ? nDistinctRandom(cards, 100) : cards }),
     });
 
     const cobrajson = await cobraresult.json();

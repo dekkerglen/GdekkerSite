@@ -68,6 +68,9 @@ const sets = [
   'ONE',
   'MOM',
   'WOE',
+  'WHO',
+  'LTR',
+  'LCI',
 ];
 
 module.exports = sets;
