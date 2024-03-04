@@ -1,7 +1,6 @@
 /* eslint-disable no-await-in-loop */
 const seedrandom = require('seedrandom');
 const fetch = require('node-fetch');
-const types = require('../creatureTypes');
 const sets = require('../sets');
 
 const keywords = [
@@ -105,35 +104,17 @@ const oracleTerms = [
 ];
 
 const valueTerms = [
-  () => `type:${types[Math.floor(Math.random() * types.length)]}`,
   () => {
     return `cmc${['=0', '=1', '=2', '=3', '=5', '=6', '=7', '>7'][Math.floor(Math.random() * 8)]}`;
   },
   () => {
-    return `ci=${[0, 1, 2, 3, 5][Math.floor(Math.random() * 5)]}`;
+    return `ci=${[3, 5][Math.floor(Math.random() * 5)]}`;
   },
   () => {
     return `ci=${combinations[Math.floor(Math.random() * combinations.length)]}`;
   },
-  () => `power=${Math.floor(Math.random() * 7)}`,
-  () => `toughness=${Math.floor(Math.random() * 7)}`,
   () => `set:${sets[Math.floor(Math.random() * sets.length)]}`,
   () => `keyword:${keywords[Math.floor(Math.random() * keywords.length)]}`,
-  () => {
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    const pips = Math.floor(Math.random() * 2) + 1;
-    const generic = Math.floor(Math.random() * 3);
-
-    let base = `mana=`;
-    if (generic > 0) {
-      base += `{${generic}}`;
-    }
-    for (let i = 0; i < pips; i++) {
-      base += `{${color}}`;
-    }
-
-    return base;
-  },
 ];
 
 const shuffle = (array) => {
@@ -204,7 +185,7 @@ const newConnections = async (seed) => {
       const [q1, q2] = terms;
 
       cards = await getCards(q1, q2);
-    } while (cards.length < 50);
+    } while (cards.length < 20);
 
     const cobraresult = await fetch(`https://cubecobra.com/tool/mtgconnect`, {
       method: 'POST',
@@ -219,8 +200,7 @@ const newConnections = async (seed) => {
     const detailedCards = cobrajson.cards;
 
     // sort by most played, filter out cards with no history
-    const filteredCards = detailedCards
-      .filter((card) => card && card.popularity)
+    const filteredCards = nDistinctRandom(detailedCards.filter((card) => card && card.popularity).slice(0, 20), 10)
       .sort((a, b) => {
         // sort by pop desc
         return b.popularity - a.popularity;
@@ -228,7 +208,7 @@ const newConnections = async (seed) => {
       .map((card) => ({
         name: card.name,
         imageUrl: card.image_normal,
-        synergistic: card.synergistic.slice(0, 4).map((item) => ({
+        synergistic: nDistinctRandom(card.synergistic.slice(0, 6), 4).map((item) => ({
           name: item.name,
           imageUrl: item.image_normal,
         })),
