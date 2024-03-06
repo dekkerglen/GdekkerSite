@@ -52,9 +52,6 @@ const combinations = [
 
 const valueTerms = [
   () => {
-    return `cmc${['=0', '=1', '=2', '=3', '=5', '=6', '=7', '>7'][Math.floor(Math.random() * 8)]}`;
-  },
-  () => {
     return `ci=${[3, 5][Math.floor(Math.random() * 2)]}`;
   },
   () => {
