@@ -116,11 +116,12 @@ const newConnections = async (seed) => {
 
   let cards = [];
   let result = [];
+  let filter;
 
   do {
     do {
       const [q1] = nDistinctRandom(valueTerms, 1).map((fn) => fn());
-
+      filter = q1;
       cards = await getCards(q1);
     } while (cards.length < 20);
 
@@ -163,6 +164,8 @@ const newConnections = async (seed) => {
       }
     }
   } while (result.length < 4);
+
+  result.filter = filter;
 
   return result;
 };
