@@ -52,9 +52,6 @@ const combinations = [
 
 const valueTerms = [
   () => {
-    return `ci=${[3, 5][Math.floor(Math.random() * 2)]}`;
-  },
-  () => {
     return `ci=${combinations[Math.floor(Math.random() * combinations.length)]}`;
   },
   () => `set:${sets[Math.floor(Math.random() * sets.length)]}`,
